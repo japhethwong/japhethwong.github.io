@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Practice Set 1 (Answers) | Japheth Wong</title>
+        <link rel="stylesheet" href="../styles/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <div id="container">
+        <h1 id="set1q">Practice Set 1 (Answers)</h3>
+        <p><b>Released: </b>March 10, 2015</p>
+        
+        <p>For each of these problems, there are likely many valid approaches.  I have illustrated some possible solutions; if you come up with a better solution, please let me know!</p>
+        
+        <p>Most interviewers don't care what language you use.  I've opted to use Python for most of my solutions, but be sure to ask your interviewer and/or recruiter to see if the company does prefer or require a specific language.</p>
+
+        <p>For each of the below questions, remember to: (1) talk through a high-level algorithmic idea, (2) code in the language of your choice, (3) check your code with some test cases, and (4) discuss the runtime and space complexities of your solution.  At first, focus on just getting a solution that is reasonably efficient; you can always go back and optimize your code later.  The times I have included are rough target times; don't worry too much about these.</p>
+        
+        <hr />
+
+        <p><b>Question 1. </b>(15 min) Implement a function <span class="code">pow(a, b)</span> which takes in two integers \(a\) and \(b\) and computes \(a^{b}\).  You may assume that \(b\) is a non-negative integer.</p>
+
+        <p><b>Solution 1. </b></p>
+
+        <p>Let's begin with the naive solution: we could simply use a loop which iterates \(b\) times, where we multiply \(a\) to a running product in each loop iteration.</p>
+
+        <pre>
+            <code>
+def pow_naive(a, b):
+    product = 1
+    for i in range(b):
+        product *= a
+    return product
+            </code>
+        </pre>
+
+        <p>It would be wise to run through a test or two to make sure that your code is correct, and that you're able to check for edge cases.  You would want to do this by tracing through your code and showing your work along the way to your interviewer.</p>
+
+        <p>Following that, it would be wise to perform some analysis, even if you aren't prompted to do so.  In this case, we have written an algorithm with runtime complexity of \(O(n)\), where \(n\) is the value of \(b\), and space complexity \(O(1)\).</p>
+
+        <p>Can we do better than this in terms of runtime?  After perhaps talking about the first solution, you'd want to optimize your code.  This question should probably remind you of a similar question you have seen before: the algorithm for doing the bitwise multiply in homework 2.</p>
+
+        <p>There are a few cases we need to consider:</p>
+        <ol>
+            <li><b>If \(b == 0\):</b> This is a trivial case since we know that \(a^{0} = 1\) for all values of \(a\).  We can return immediately.</li>
+            <li><b>If \(b == 1\):</b> This is a base case for our recursion, and we know that \(a^{1} = a\) for all values of \(a\).  We can immediately return the result, \(a\).</li>
+            <li><b>If \(b\) is even:</b> 
+                \(a^{b} = a^{2(\frac{b}{2})} = {(a^{2})}^{\frac{b}{2}}\)
+                Our code replicates this algebraic manipulation in our recursive call.</li>
+            <li><b>If \(b\) is odd:</b>
+                \(a^{b} = a^{b-1+1} = a^{2(\frac{b-1}{2}) + 1} = a \times {(a^{2})}^{\frac{b-1}{2}}\)</li>
+        </ol>
+
+        <p>There is a rather natural translation to a recursive solution here.</p>
+        <pre>
+            <code>
+def pow(a, b):
+    if b == 0:          # Trivial case: a^0 = 1 for all a.
+        return 1
+    elif b == 1:        # Base case: a^1 = a for all a.
+        return a
+    elif b % 2 == 0:    # b is even: a^b = (a^2)^(b/2)
+        return pow(a ** 2, b / 2)
+    else:               # b is odd: a^b = a * (a^2)^((b-1)/2)
+        return a * pow(a ** 2, (b-1) / 2)
+            </code>
+        </pre>
+
+        <p>Our runtime complexity is now reduced to \(O(\log n)\), but we will end up making \(O(\log n)\) recursive calls to <span class="code">pow()</span>, so the space complexity is now \(O(\log n)\).  It would be a good idea to discuss this tradeoff with your interviewer.</p>
+
+        <p>Note: Once you have the high level algorithm, it shouldn't be too difficult to convert that into any language.  For instance, the above algorithm could have easily been written in Java:</p>
+
+        <pre>
+            <code>
+public int pow(int a, int b) {
+    if (b == 0) {
+        return 1;
+    } else if (b == 1) {
+        return a;
+    } else if (b % 2 == 0) {
+        return pow(Math.pow(a, 2), b / 2);
+    } else {
+        return a * pow(Math.pow(a, 2), (b-2) / 2);
+    }
+}
+            </code>
+        </pre>
+
+        <p>The difference is that Java is more verbose (esp. if you have to do file I/O operations), so I typically prefer to use Python in my interviews.</p>
+        <hr />
+
+        <p><b>Question 2a. </b>(10 min) Consider a scenario where you have a String, a starting index, and an ending index.  Write a function which counts the number of spaces between the two indices, inclusive.</p>
+
+        <p><b>Solution 2a.</b>
+
+        <p>As far as I can tell, there's really only one efficient way to do this problem.  Grab the substring of interest and iterate over each character in the substring, counting the number of spaces you encounter as you go.</p>
+
+        <p>The main tricky things to keep in mind while writing your code: error handling.  What if the start index comes after the end index, or if the indices are out of bounds?  Also, we specified that the indices are inclusive, so make sure you don't have an off-by-one error!</p>
+
+        <pre>
+            <code class="hljs python">
+def count_spaces(input, start, end):
+    # Invalid (start, end) index pair.
+    if start > end:
+        return 0
+    
+    # Adjust start and end respectively to handle other error situations.
+    start = max(0, start)
+    end = min(end+1, len(input))  # Note: I am choosing to make end exclusive.
+
+    # Initialize a counter for the spaces.  Then process the input string.
+    num_spaces = 0
+    for c in input[start:end]:
+        if c == " ":
+            num_spaces += 1
+
+    return num_spaces
+            </code>
+        </pre>
+
+        <p>The equivalent in Java:</p>
+
+        <pre>
+            <code>
+public int countSpaces(String input, int start, int end) {
+    // Invalid (start, end) index pair.
+    if (start > end) {
+        return 0;
+    }
+
+    // Adjust start and end respectively to handle other error situations.  (Prevent out-of-bounds)
+    start = Math.max(0, start);
+    end = Math.min(end+1, input.length);    // Note: I am choosing to make end exclusive.
+
+    // Initialize a counter for the spaces.  Then process the input string.
+    int numSpaces = 0;
+    for (int i = start; i < end; i++) {
+        if (' ' == input.charAt(i)) {   // Java question: Why is == here OK?
+            numSpaces++;
+        }
+    }
+
+    return numSpaces;
+}
+            </code>
+        </pre>
+
+        <p>The runtime complexity of this algorithm is \(O(n)\), where \(n\) represents the length of the input string.  The space complexity of this algorithm is \(O(n)\) for the Python implementation (since we make a copy of the original string) and \(O(1)\) for the Java implementation.  Note that I could have written my Python code in a similar way to the Java code to get \(O(1)\); instead of creating the substring, I could just loop over the original string using the indices.</p>
+
+        <hr />
+
+        <p><b>Question 2b. </b>(15 min)  Now let's say we have a really long String and it doesn't change (the indices, however, may be different each time).  You will be running many queries on this String.  How would write a more efficient solution?</p>
+
+        <p><b>Solution 2b.</b></p>
+
+        <p>When you see something like this -- "very long String" -- you should probably think about caching.  Hopefully this idea was familiar to you from Discussion 6, Question 3.1.</p>
+
+        <p>The idea in this question: instead of computing the result each time, let's pay the cost of computing the number of spaces up to a certain index just <i>once</i> and store the results.  What should we store?  Since the indices we are given as input vary between calls, we should store an index as a key, and the number of spaces from the beginning of the string up to the index.  When we query to find the number of spaces, all we need to do is look up the number of spaces up to the starting index, the number of spaces up to the end index, and subtract the values.</p>
+
+        <pre>
+            <code class="hljs python">
+cache = None    # Maps index -> number of spaces up to that index.
+input_string = None
+
+def count_spaces(input, start, end):
+    # Check if we need to build the cache.
+    if input != input_string or not cache:
+        compute_spaces(input)
+
+    # Adjust the indices so that we are in bounds.
+    start = max(0, start)
+    end = min(end, len(input)-1)
+
+    return cache[end] - cache[start -1]
+
+
+def compute_spaces(input):
+    global cache, input_string
+    cache = {}  # Use a map (dictionary) as cache.
+    input_string = input    # Save the input_string so we know if it changed.
+
+    num_spaces = 0
+    for i in range(len(input)):
+        if ' ' == input[i]:
+            num_spaces += 1
+        cache[i] = num_spaces   # Store index -> number of spaces up to index (inclusive).
+    cache[-1] = 0   # Insert entry to allow queries where start = 0.
+            </code>
+        </pre>
+
+        <p>A similar program in Java:</p>
+
+        <pre>
+            <code>
+import java.util.HashMap;
+import java.util.Map;
+
+public class SpaceCounter {
+    private Map<Integer, Integer> cache;
+    private String inputString;
+
+    public SpaceCounter() {
+        cache = new HashMap<Integer, Integer>();
+    }
+
+    public int countSpaces(String input, int start, int end) {
+        // Check if we need to build cache, and build if necessary.
+        if (!input.equals(inputString) || cache.isEmpty()) {
+            computeSpaces(input);
+        }
+
+        // Adjust the indices so that we are in bounds.
+        start = Math.max(0, start);
+        end = Math.min(end, input.length - 1);
+
+        return cache.get(end) - cache.get(start-1);
+    }
+
+    private void computeSpaces(String input) {
+        cache.clear();          // Use a map as cache.  HashMap is well suited.
+        inputString = input;    // Save the inputString so we know if it changed.
+
+        int numSpaces = 0;
+        for (int i = 0; i < input.length; i++) {
+            if (' ' == input.charAt(i)) {
+                numSpaces++;
+            }
+            cache.put(i, numSpaces);
+        }
+        cache.put(-1, 0);
+    }
+}
+            </code>
+        </pre>
+
+        <p>The runtime complexity of this algorithm is \(O(n)\) for the first time we call <span class="code">count_spaces()</span>, and \(O(1)\) for each subsequent call to the algorithm, thanks to the cache.  The space complexity of the algorithm is \(O(n)\) because we have to build this cache.</p>
+
+        <p><a href="resources.html">&lt; Back to home</a></p>
+        </div>
+    </body>
+</html>
