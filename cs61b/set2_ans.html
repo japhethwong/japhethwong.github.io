@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Practice Set 2 (Answers) | Japheth Wong</title>
+        <link rel="stylesheet" href="../styles/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <div id="container">
+        <h1 id="set1q">Practice Set 2 (Answers)</h3>
+        <p><b>Released: </b>March 16, 2015</p>
+        
+        <p>For each of these problems, there are likely many valid approaches.  I have illustrated some possible solutions; if you come up with a better solution, please let me know!</p>
+        
+        <p>Most interviewers don't care what language you use.  I've opted to use Python for most of my solutions, but be sure to ask your interviewer and/or recruiter to see if the company does prefer or require a specific language.</p>
+
+        <p>For each of the below questions, remember to: (1) talk through a high-level algorithmic idea, (2) code in the language of your choice, (3) check your code with some test cases, and (4) discuss the runtime and space complexities of your solution.  At first, focus on just getting a solution that is reasonably efficient; you can always go back and optimize your code later.  The times I have included are rough target times; don't worry too much about these.</p>
+        
+        <hr />
+
+        <p>For each of the below, you may assume that you have a <span class="code">TreeNode</span> class which knows its parent, its left child, its right child, and its value.  If you need any additional behavior, you will need to write the code yourself.</p>
+
+        <hr />
+
+        <p><b>Question 1. </b>(20 min) Implement a function which takes as input a preorder traversal and inorder traversal of a binary tree, and outputs the root of the reconstructed tree.</p>
+
+        <p><b>Solution 1. </b></p>
+
+        <p>One thing that was not clearly specified was the types of the inputs: this would have been good to clarify with your interviewer before proceeding.  In my solution, I assume that the inputs are provided as arrays.</p>
+
+        <p>Recall that a <i>preorder traversal</i> is constructed by visiting the current node first before recursively visiting the node's children.  When we start with the root of the tree, we first visit the root, then its left subtree, followed by the right subtree.  This means that the 0th element of the preorder traversal is the root of the tree, the 1st element is the root's left child (if applicable), etc.</p>
+
+        <p>Conversely, an <i>inorder traversal</i> visits a root's left child, then the root, followed by the root's right child.  This means that we begin by visiting the left-most child in the tree (the minimum value in a binary search tree).</p>
+
+        <p>Using this information, our algorithm is as follows.  We extract the root of the current subtree by reading the next element of the preorder traversal.  We then find the current root in the inorder traversal, and we know that all elements to the left belong to the left subtree and all elements to the right belong to the right subtree.  We hit the base cases at the leaves of the tree.</p>
+
+        <p>Translating this to Python code:</p>
+
+        <pre>
+            <code>
+def traverse_tree(inorder, preorder):
+    if len(preorder) == 0:   # Base case 1: Nothing left to process in this subtree.
+        return None
+
+    curr_root_val = preorder.pop(0) # Modifies preorder, which we have pointer to at different levels of recursion.
+    curr_root = TreeNode(curr_root_val)
+    if len(preorder) == 1:   # Base case 2: Only one element, so go ahead and create the leaf.
+        return curr_root
+
+    # General case: Figure out where the current root is and split into left and right subtrees.
+    root_index = inorder.index(curr_root)   # Gets the first index of inorder which matches the curr_root.
+    left_subtree = inorder[:root_index]     # Returns a list from index 0 to root_index (exclusive)
+    right_subtree = inorder[root_index+1:]  # Returns a list from index root_index+1 to the end
+    curr_root.left_child = traverse_tree(left_subtree, preorder)    # Note: preorder is modified with each call to traverse_tree.
+    curr_root.right_child = traverse_tree(right_subtree, preorder)
+    return curr_root
+            </code>
+        </pre>
+
+        <p>As written above, the runtime is \(O(n^{2})\): we expect to call <span class="code">traverse_tree()</span> \(O(n)\) times.  Each call of <span class="code">traverse_tree()</span> runs in \(O(n)\) time because list splicing is a linear-time operation.  Even though <span class="code">index()</span> on a sorted list can be done in \(O(\log n)\) time using binary search, (1) we are using the built-in <span class="code">index()</span> here which does not assume a sorted list, and (2) it is dominated by the runtime of splicing.</p>
+
+        <p>This function can be written to run in \(O(n \log n)\).  Instead of using list splicing, we can maintain the start and end indices we are considering in a helper function.  We would also need to maintain some variable for the current index for preorder.  We would change the signature of the function to:</p>
+
+        <p class="code">
+            traverse_tree_helper(inorder, preorder, start, end)
+        </p>
+
+        <p>The overall logic for the helper would remain the same.  Our <span class="code">traverse_tree()</span> code would thus look like this:</p>
+
+        <pre>
+            <code>
+def traverse_tree(inorder, preorder):
+    return traverse_tree_helper(inorder, preorder, 0, len(preorder))
+            </code>
+        </pre>
+
+        <hr />
+
+        <p><b>Question 2. </b>(15 min) Given a sorted array of integers, write a function which converts the sorted array into a balanced binary search tree.</p>
+
+        <p><b>Solution 2. </b></p>
+
+        <p>I didn't realize this would be featured on Discussion 9 for this semester, but we went over the below solution in section:</p>
+
+        <pre>
+            <code>
+def build_bst(nums):
+    if len(nums) == 0:
+        return None
+    mid = nums.length // 2  # Integer division in Python.
+    TreeNode result = TreeNode(nums[mid])
+    result.left = build_bst(nums[:mid])
+    result.right = build_bst(nums[mid+1:])
+    return result
+            </code>
+        </pre>
+
+        <p>In section, we gave you a helper function <span class="code">slice()</span> which would handle list splicing for you in constant time.  In reality, we aren't really able to slice a list in constant time; the above solution thus runs in \(O(n^{2})\) time because splicing is linear.  At the end of section, I thus proposed an alternate solution which <i>does</i> work in linear time overall, though it is slightly clumsier to write:</p>
+
+        <pre>
+            <code>
+def build_bst(nums):
+    return build_bst_helper(nums, 0, len(nums))
+
+def build_bst_helper(nums, start, end):
+    if end - start <= 0:
+        return None
+    mid = (end - start) // 2 + start
+    TreeNode result = TreeNode(nums[mid])
+    result.left = build_bst_helper(nums, start, mid)
+    result.right = build_bst_helper(nums, mid+1, end)
+    return result
+            </code>
+        </pre>
+
+        <p>As you can see, the logic is exactly the same as before; we just need to introduce a helper function to keep track of the range of indices we are considering.  The equivalent Java code is produced below:</p>
+
+        <pre>
+            <code class="hljs java">
+public TreeNode buildBST(int[] nums) {
+    return buildBSTHelper(nums, 0, nums.length);
+}
+
+// Declaring this as private because this is a helper which shouldn't be part of your public API.
+private TreeNode buildBSTHelper(int[] nums, int start, int end) {
+    if (end - start <= 0) {
+        return null;
+    }
+
+    int mid = (end-start)/2 + start;
+    TreeNode result = new TreeNode(nums[mid]);
+    result.left = buildBSTHelper(nums, start, mid);
+    result.right = buildBSTHelper(nums, mid+1, end);
+    return result;
+}
+            </code>
+        </pre>
+
+        <hr />
+
+        <p><b>Question 3. </b>(10 min) Reverse each word in a given input String.  For example: "I love CS61B" would become "I evol B16SC".</p>
+
+        <p><b>Solution 3.</b></p>
+
+        <p>This question seems quite easy at first, but it is testing a subtlety of the language which we have hinted at in 61B.  The high-level solution: split the String into individual words, iterate through those Strings, and reverse each word as we go.  We can then join the Strings together to produce the result.</p>
+
+        <pre>
+            <code class="hljs java">
+import java.util.StringBuilder;
+
+public String reverseAllStrings(String input) {
+    if (input == null) {
+        return null;
+    }
+    String[] tokens = input.split(" ");
+    StringBuilder sb = new StringBuilder(tokens.length);
+    for (String token : tokens) {
+        sb.append(reverse(input));    // Reverse the individual token.
+        sb.append(" ");               // Separate the words.
+    }
+    return sb.toString().trim();      // Remove the trailing space.
+}
+
+private String reverse(String input) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = sb.length-1; i >= 0; i--) {
+        sb.add(input.charAt(i));
+    }
+    return sb.toString();
+}
+            </code>
+        </pre>
+
+        <p>Why did I use StringBuilder instead of just concatenating Strings together by using the <span style="code">+</span> operator?  Strings in Java are immutable: when you concatenate Strings, you are actually creating a <i>new</i> String.  By incrementally building up a String through concatenation, you're creating a lot of garbage which will likely cause a performance hit.  When you use StringBuilder, however, you create the final result (the immutable String) only at the end, when you won't be modifying the String anymore.</p>
+
+        <p>If you were doing this question in Python, the code below would be what you'd want, since Strings in Python are also immutable.</p>
+
+        <pre>
+            <code>
+def reverse_all_strings(input):
+    if not input:
+        return None
+
+    tokens = input.split()   # Python's split uses spaces by default.
+    reversed_tokens = []
+    for token in tokens:
+        reversed_tokens.append(token[::-1]) # This is a very Pythonic way of reversing a String.  Be prepared to explain it.
+    return " ".join(reversed_tokens)        # The " " specifies the delimiter to use.
+            </code>
+        </pre>
+
+        <p>The runtime of this algorithm would be \(O(nk)\) where \(n\) represents the number of words in the input String and \(k\) represents the length of the longest word in the String.</p>
+
+        <p><a href="resources.html">&lt; Back to home</a></p>
+        </div>
+    </body>
+</html>
