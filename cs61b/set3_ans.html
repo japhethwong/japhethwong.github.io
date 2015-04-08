@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Practice Set 3 (Answers) | Japheth Wong</title>
+        <link rel="stylesheet" href="../styles/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <div id="container">
+        <h1 id="set1q">Practice Set 3 (Answers)</h3>
+        <p><b>Released: </b>March 30, 2015</p>
+
+        <p><b>Question 1. </b>(20 min) Write a function which reads a text file and finds the ten most occurring words in the file.</p>
+
+        <p><b>Solution 1. </b></p>
+
+        <p>The approach is relatively straightforward: read in the file one line at a time.  For each line, process each word by either adding an entry into the dictionary or incrementing the count.</p>
+
+        <p>Once you have finished processing the file, we have two options:</p>
+
+        <ol>
+            <li><p>The solution I use below is to sort the list and splice out the entries that we want.</p></li>
+            <li><p>An alternative would be to use a heap (Python has a built-in <a href="https://docs.python.org/2/library/queue.html">Queue</a> library, which contains a PriorityQueue class).  There is a bit of a performance overhead in this particular application (since Queue is synchronized and can handle concurrent operations), but in terms of asymptotic performance, it is the same.</p></li>
+        </ol>
+
+        <p>Using the first of the two proposals above, here is some Python code:</p>
+
+        <pre>
+            <code class="hljs python">
+def find_frequent_words(filename, n):
+    """
+    find_frequent_words() finds the n most frequent words present in the file.
+    @param filename is the name of the file to be opened; assumed to be valid
+    @param n is an integer corresponding to the number of words to return; assumed to be non-negative
+    @return a list of length n containing the words
+    """
+    word_counts = process_file(filename)    # Returns a map of words to keys.
+    sorted_words = sorted(word_counts.items(), key=lambda entry: -entry[1])
+
+    if len(sorted_words) < n:
+        return sorted_words
+    else:
+        return sorted_words[:n]
+
+def process_file(filename):
+    """
+    process_file() reads contents of file and counts the number of times each word appears in the file.
+    @param filename is the name of the file to be opened; assumed to be valid.
+    @return a dictionary mapping word to associated count
+    """
+    counts_by_word = {}
+    with open(filename, 'r') as file:
+        for line in file:
+            for word in line.split():
+                token = word.lower()
+                if token in counts_by_word:
+                    counts_by_word[token] += 1
+                else:
+                    counts_by_word[token] = 1
+    return counts_by_word
+
+            </code>
+        </pre>
+
+        <p>This is one area in which Python really shines: dealing with files.  The overhead needed to read in files with Java is rather significant.  In class, we have been using the Princeton standard library to help simplify file I/O.  In general, assume you don't have access to that library.  See <a href="http://www.mkyong.com/java/how-to-read-file-from-java-bufferedreader-example/">this tutorial</a> for a quick example of how to deal with file input using only Java's standard libraries.</p>
+
+        <pre>
+            <code style="hljs java">
+
+            </code>
+        </pre>
+
+        <p><b>Question 2. </b>(30 min) Write a function which takes as input a tree and returns a list of all duplicate subtrees.  For example: </p>
+
+        <pre>
+Input:    1         Output: [ 2  ,  3  ]
+         / \                [  \       ]
+        2   2               [   3      ]
+         \   \
+          3   3    
+        </pre>
+
+        <p><a href="resources.html">&lt; Back to home</a></p>
+        </div>
+    </body>
+</html>
