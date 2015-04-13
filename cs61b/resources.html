@@ -127,7 +127,44 @@ Input:    1         Output: [ 2  ,  3  ]
             <!-- Practice Set 4 -->
             <h3 id="set4q">Practice Set 4</h3>
 
-            <p>Coming soon -- sorry for the delay, it's been a busy week.</p>
+            <p><b>Released: </b>April 13, 2015  (Solutions on April 20)</p>
+
+            <p><b>Question 1. </b>(10 min) Assume there is a sorted array that has been "rotated" k times.  For instance:</p>
+
+            <pre>
+[a, a, b, c, d, e, f, f]  -- Rotate by 3 -> [e, f, f, a, a, b, c, d]
+            </pre>
+
+            <p>Given this rotated array, reconstruct the original array.</p>
+
+            <p><b>Question 2. </b> (15 min)  Imagine you're driving across the country and you turn on the car's stereo.  You wish to write a program that will automatically set the six presets on your stereo to the six frequencies which are strongest at the time.  Write a function which takes as input, the minimum frequency, the maximum frequency, and the interval between frequencies, and returns the six frequencies you want to set.  You are given a helper function which takes in the min frequency and max frequency of a frequency band and returns the signal strength.</p>
+
+            <p><b>Question 3.</b>  (15 min)  Given the following API, write a function that takes as input a <span style="code">NestedInteger</span> and computes the weight of a nested list.  We define weight as the sum of all integers in the list weighted by their depth.  For example, given the list <span style="code">{{1, 1}, 2, {1, 1}}</span>, the function should return 10 (four 1's at depth 2, one 2 at depth 1).  As another example, the list <span style="code">{1, {4, {6}}}</span> should have a weight of 27 (one 1 at depth 1, one 4 at depth 2, and one 6 at depth 3).</p>
+
+            <p>You may assume that the <span style="code">NestedInteger</span> class has the following interface:</p>
+
+            <pre>
+                <code class="hljs java">
+public interface NestedInteger {
+    /** 
+     * @return true if this NestedInteger holds a single integer, rather than a nested list
+     */
+    boolean isInteger();
+
+    /** 
+     * @return the single integer that this NestedInteger holds, if it holds a single integer
+     * Return null if this NestedInteger holds a nested list
+     */
+    Integer getInteger();
+    
+    /** 
+     * @return the nested list that this NestedInteger holds, if it holds a nested list
+     * Return null if this NestedInteger holds a single integer
+     */
+    List<NestedInteger> getList();
+}
+                </code>
+            </pre>
         </div>
     </body>
 </html>
