@@ -2,20 +2,22 @@
 <html>
     <head>
         <title>My Travel Map</title>
+        <link rel="stylesheet" href="styles/style.css" />
     </head>
     <body>
-        <h1>My Travel Map</h1>
+        <div id="container">
+            <h1>My Travel Map</h1>
 
-        <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
-        <div id="map_div" style="width: 900px; height: 500px;"></div>
+            <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['geochart']}]}"></script>
+            <div id="map_div" style="width: 900px; height: 500px;"></div>
 
-        <script type="text/javascript" src="map.js">
-            
-        </script>
+            <script type="text/javascript" src="map.js">
 
-        <script type="text/javascript">
-        google.setOnLoadCallback(function() { drawMap("map_div"); })
-        </script>
+            </script>
 
+            <script type="text/javascript">
+            google.setOnLoadCallback(function() { drawMap("map_div"); })
+            </script>
+        </div>
     </body>
 </html>
