@@ -129,7 +129,7 @@ function loadDefaultData() {
   data['Belgium'] = genEntry('Belgium', {'visit': ['Dec 2013']});
   data['Brazil'] = genEntry('Brazil', {'want' : true});
   data['Cambodia'] = genEntry('Cambodia', {'want': true});
-  data['Canada'] = genEntry('Canada', {'visit' : ['June 2008', 'May 2017']});
+  data['Canada'] = genEntry('Canada', {'visit' : ['May 2017', 'June 2008']});
   data['China'] = genEntry('China', {'want': true});
   data['Croatia'] = genEntry('Croatia', {'visit' : ['Mar 2016']});
   data['Czech Republic'] = genEntry('Czech Republic', {'want': true});
