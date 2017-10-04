@@ -48,7 +48,7 @@ function drawMap(divId, dataSrc) {
     'resolution': 'countries', 
     'legend': 'none', 
     'colorAxis': {
-      'colors': ['#438094', '#78507B', '#6DBD9B', '#79AEC0'],
+      'colors': ['#6DBD9B', '#78507B', '#d9188f', '#438094'], // Old color for visited = '#79AEC0'
       'values': [1,2,3,4]
     },
     'tooltip': {
