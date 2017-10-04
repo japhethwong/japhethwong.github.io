@@ -79,13 +79,15 @@ function genTooltip(entry) {
   var val = entry['value'];
   if ('plan' in val) {
     elems.push("Upcoming trip in " + val['plan']);
-  } else if ('live' in val) {
+  }
+  if ('live' in val) {
     if (val['live'] == 'Present') {
       elems.push("Currently living here");
     } else {
       elems.push("Lived " + val['live'])
     }
-  } else if ('visit' in val) {
+  }
+  if ('visit' in val) {
     elems.push("Last visited in " + val['visit'][0]);
     var visitCount = val['visit'].length;
     if (visitCount == 1) {
@@ -94,7 +96,8 @@ function genTooltip(entry) {
       var timesString = "times";
     }
     elems.push("(Visited " + visitCount + " " + timesString + ")");
-  } else if ('want' in val) {
+  }
+  if ('want' in val) {
     elems.push("On the wishlist");
   }
 
@@ -124,26 +127,29 @@ function genEntry(name, value, link) {
 function loadDefaultData() {
   var data = {};
   data['Australia'] = genEntry('Australia', {'want': true});
-  data['Austria'] = genEntry('Austria', {'want': true});
+  data['Austria'] = genEntry('Austria', {'plan' : ['Jun 2018']});
   data['Bahamas'] = genEntry('Bahamas', {'visit': ['Feb 2003']});
   data['Belgium'] = genEntry('Belgium', {'visit': ['Dec 2013']});
   data['Brazil'] = genEntry('Brazil', {'want' : true});
   data['Cambodia'] = genEntry('Cambodia', {'want': true});
   data['Canada'] = genEntry('Canada', {'visit' : ['May 2017', 'June 2008']});
+  data['Chile'] = genEntry('Chile', {'want': true});
   data['China'] = genEntry('China', {'want': true});
-  data['Croatia'] = genEntry('Croatia', {'visit' : ['Mar 2016']});
-  data['Czech Republic'] = genEntry('Czech Republic', {'want': true});
+  data['Croatia'] = genEntry('Croatia', {'visit' : ['Mar 2016'], 'plan' : ['Jun 2018']});
+  data['Czech Republic'] = genEntry('Czech Republic', {'plan' : ['Jun 2018']});
   data['Denmark'] = genEntry('Denmark', {'want': true});
   data['Egypt'] = genEntry('Egypt', {'want': true});
   data['France'] = genEntry('France', {'visit' : ['May 2016','Aug 2013']});
   data['Germany'] = genEntry('Germany', {'visit' : ['Dec 2013']});
   data['Hong Kong'] = genEntry('Hong Kong', {'visit' : ['Oct 2016', 'Jun 2015', 'May 2015', 'Dec 2012', 'Dec 2011', 'Dec 2009', 'Feb 2009', 'Feb 2008', 'Feb 2006', 'Feb 2004']});
-  data['Hungary'] = genEntry('Hungary', {'want': true});
+  data['Hungary'] = genEntry('Hungary', {'plan' : ['Jun 2018']});
   data['Iceland'] = genEntry('Iceland', {'visit': ['Mar 2017']});
   data['Ireland'] = genEntry('Ireland', {'want': true});
+  data['Israel'] = genEntry('Israel', {'want': true});
   data['India'] = genEntry('India', {'want': true});
   data['Italy'] = genEntry('Italy', {'visit' : ['June 2012']});
   data['Japan'] = genEntry('Japan', {'visit' : ['Jun 2015']});
+  data['Jordan'] = genEntry('Jordan', {'want': true});
   data['Laos'] = genEntry('Laos', {'want': true});
   data['Macao'] = genEntry('Macao', {'visit' : ['Feb 2009']});
   data['Mexico'] = genEntry('Mexico', {'want': true});
@@ -164,7 +170,7 @@ function loadDefaultData() {
   data['Switzerland'] = genEntry('Switzerland', {'want': true});
   data['Taiwan'] = genEntry('Taiwan', {'visit' : ['Dec 2011']});
   data['Thailand'] = genEntry('Thailand', {'want' : true});
-  data['Turkey'] = genEntry('Turkey', {'want': true});
+  data['Turkey'] = genEntry('Turkey', {'plan' : ['Jun 2018']});
   data['United Kingdom'] = genEntry('United Kingdom', {'live': 'Aug-Dec 2013', 'visit' : ['Mar 2016', 'June 2012'] });
   data['United States'] = genEntry('United States', {'live': 'Present'});
   data['Vatican City'] = genEntry('Vatican City', {'visit': ['Jun 2012']});
