@@ -130,6 +130,7 @@ function loadDefaultData() {
   data['Austria'] = genEntry('Austria', {'visit' : ['Jun 2018']});
   data['Bahamas'] = genEntry('Bahamas', {'visit': ['Feb 2003']});
   data['Belgium'] = genEntry('Belgium', {'visit': ['Dec 2013']});
+  data['Bosnia and Herzegovina'] = genEntry('Bosnia and Herzegovina', {'visit': ['Jun 2018']});
   data['Brazil'] = genEntry('Brazil', {'want' : true});
   data['Cambodia'] = genEntry('Cambodia', {'want': true});
   data['Canada'] = genEntry('Canada', {'visit' : ['May 2017', 'June 2008']});
@@ -171,7 +172,7 @@ function loadDefaultData() {
   data['Switzerland'] = genEntry('Switzerland', {'want': true});
   data['Taiwan'] = genEntry('Taiwan', {'visit' : ['Dec 2011']});
   data['Thailand'] = genEntry('Thailand', {'want' : true});
-  data['Turkey'] = genEntry('Turkey', {'plan' : ['Jun 2018']});
+  data['Turkey'] = genEntry('Turkey', {'visit' : ['Jun 2018']});
   data['United Kingdom'] = genEntry('United Kingdom', {'live': 'Aug-Dec 2013', 'visit' : ['Mar 2016', 'June 2012'] });
   data['United States'] = genEntry('United States', {'live': 'Present'});
   data['Vatican City'] = genEntry('Vatican City', {'visit': ['Jun 2012']});
