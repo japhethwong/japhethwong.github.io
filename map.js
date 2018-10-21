@@ -142,9 +142,11 @@ function loadDefaultData() {
   data['Egypt'] = genEntry('Egypt', {'want': true});
   data['France'] = genEntry('France', {'visit' : ['May 2016','Aug 2013']});
   data['Germany'] = genEntry('Germany', {'visit' : ['Dec 2013']});
+  data['Greece'] = genEntry('Greece', {'want': true});
   data['Hong Kong'] = genEntry('Hong Kong', {'visit' : ['Oct 2016', 'Jun 2015', 'May 2015', 'Dec 2012', 'Dec 2011', 'Dec 2009', 'Feb 2009', 'Feb 2008', 'Feb 2006', 'Feb 2004']});
   data['Hungary'] = genEntry('Hungary', {'visit' : ['Jun 2018']});
   data['Iceland'] = genEntry('Iceland', {'visit': ['Mar 2017']});
+  data['Indonesia'] = genEntry('Indonesia', {'plan': ['Nov 2018']});
   data['Ireland'] = genEntry('Ireland', {'want': true});
   data['Israel'] = genEntry('Israel', {'visit': ['Oct 2018', 'Aug 2018', 'Apr 2018']});
   data['India'] = genEntry('India', {'want': true});
@@ -157,6 +159,7 @@ function loadDefaultData() {
   data['Mexico'] = genEntry('Mexico', {'want': true});
   data['Morocco'] = genEntry('Morocco', {'want': true});
   data['Myanmar'] = genEntry('Myanmar', {'want': true});
+  data['Nepal'] = genEntry('Nepal', {'want': true});
   data['Netherlands'] = genEntry('Netherlands', {'visit' : ['Dec 2013']});
   data['New Zealand'] = genEntry('New Zealand', {'visit' : ['Jan 2015']});
   data['Norway'] = genEntry('Norway', {'visit': ['Apr 2016']});
