@@ -126,6 +126,7 @@ function genEntry(name, value, link) {
  **/
 function loadDefaultData() {
   var data = {};
+  data['Argentina'] = genEntry('Argentina', {'want': true});
   data['Australia'] = genEntry('Australia', {'want': true});
   data['Austria'] = genEntry('Austria', {'visit' : ['Jun 2018']});
   data['Bahamas'] = genEntry('Bahamas', {'visit': ['Feb 2003']});
