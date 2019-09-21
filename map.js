@@ -130,7 +130,7 @@ function loadDefaultData() {
   data['Australia'] = genEntry('Australia', {'want': true});
   data['Austria'] = genEntry('Austria', {'visit' : ['Jun 2018']});
   data['Bahamas'] = genEntry('Bahamas', {'visit': ['Feb 2003']});
-  data['Belgium'] = genEntry('Belgium', {'visit': ['Dec 2013'], 'plan': ['Aug 2019']});
+  data['Belgium'] = genEntry('Belgium', {'visit': ['Dec 2013', 'Aug 2019']});
   data['Bosnia and Herzegovina'] = genEntry('Bosnia and Herzegovina', {'visit': ['Jun 2018']});
   data['Brazil'] = genEntry('Brazil', {'want' : true});
   data['Cambodia'] = genEntry('Cambodia', {'want': true});
@@ -141,7 +141,7 @@ function loadDefaultData() {
   data['Czech Republic'] = genEntry('Czech Republic', {'visit' : ['Jun 2018']});
   data['Denmark'] = genEntry('Denmark', {'want': true});
   data['Egypt'] = genEntry('Egypt', {'want': true});
-  data['France'] = genEntry('France', {'visit' : ['May 2016','Aug 2013'], 'plan': ['Aug 2019']});
+  data['France'] = genEntry('France', {'visit' : ['May 2016','Aug 2013', 'Aug 2019']});
   data['Germany'] = genEntry('Germany', {'visit' : ['Dec 2013']});
   data['Greece'] = genEntry('Greece', {'want': true});
   data['Hong Kong'] = genEntry('Hong Kong', {'visit' : ['Nov 2018', 'Oct 2016', 'Jun 2015', 'May 2015', 'Dec 2012', 'Dec 2011', 'Dec 2009', 'Feb 2009', 'Feb 2008', 'Feb 2006', 'Feb 2004']});
@@ -165,14 +165,14 @@ function loadDefaultData() {
   data['New Zealand'] = genEntry('New Zealand', {'visit' : ['Jan 2015']});
   data['Norway'] = genEntry('Norway', {'visit': ['Apr 2016']});
   data['Peru'] = genEntry('Peru', {'plan' : ['Oct 2019']});
-  data['Portugal'] = genEntry('Portugal', {'plan': ['Aug 2019']});
+  data['Portugal'] = genEntry('Portugal', {'visit': ['Aug 2019']});
   data['Russia'] = genEntry('Russia', {'want': true});
   data['Sint Maarten (Dutch part)'] = genEntry('Sint Maarten (Dutch part)', {'visit' : ['Feb 2003']});
   data['Singapore'] = genEntry('Singapore', {'visit': ['Oct 2016']});
   data['Slovakia'] = genEntry('Slovakia', {'visit': ['Jun 2018']});
   data['Slovenia'] = genEntry('Slovenia', {'want': true});
   data['South Korea'] = genEntry('South Korea', {'visit': ['Oct 2016']});
-  data['Spain'] = genEntry('Spain', {'visit' : ['May 2016'], 'plan' : ['Aug 2019']});
+  data['Spain'] = genEntry('Spain', {'visit' : ['May 2016', 'Aug 2019']});
   data['Sweden'] = genEntry('Sweden', {'visit': ['Mar 2016']});
   data['Switzerland'] = genEntry('Switzerland', {'want': true});
   data['Taiwan'] = genEntry('Taiwan', {'visit' : ['Dec 2011']});
