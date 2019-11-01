@@ -165,7 +165,7 @@ function loadDefaultData() {
   data['Netherlands'] = genEntry('Netherlands', {'visit' : ['Dec 2013']});
   data['New Zealand'] = genEntry('New Zealand', {'visit' : ['Jan 2015']});
   data['Norway'] = genEntry('Norway', {'visit': ['Apr 2016']});
-  data['Peru'] = genEntry('Peru', {'plan' : ['Oct 2019']});
+  data['Peru'] = genEntry('Peru', {'visit' : ['Oct 2019']});
   data['Portugal'] = genEntry('Portugal', {'visit': ['Aug 2019']});
   data['Russia'] = genEntry('Russia', {'want': true});
   data['Sint Maarten (Dutch part)'] = genEntry('Sint Maarten (Dutch part)', {'visit' : ['Feb 2003']});
