@@ -54,7 +54,7 @@ function drawMap(divId, dataSrc) {
     'tooltip': {
       'trigger': 'focus'
     },
-    'width': 800,
+    'width': 1000,
 //     'width': Math.min(window.innerWidth, 1.6 * window.innerHeight),
     'keepAspectRatio': true,
     'domain': 'IN',
