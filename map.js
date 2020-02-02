@@ -149,7 +149,7 @@ function loadDefaultData() {
   data['Iceland'] = genEntry('Iceland', {'visit': ['Mar 2017']});
   data['Indonesia'] = genEntry('Indonesia', {'visit': ['Nov 2018']});
   data['Ireland'] = genEntry('Ireland', {'want': true});
-  data['Israel'] = genEntry('Israel', {'visit': ['Nov 2019', 'Feb 2019', 'Oct 2018', 'Aug 2018', 'Apr 2018']});
+  data['Israel'] = genEntry('Israel', {'plan': 'Feb 2020', 'visit': ['Nov 2019', 'Feb 2019', 'Oct 2018', 'Aug 2018', 'Apr 2018']});
   data['India'] = genEntry('India', {'want': true});
   data['Italy'] = genEntry('Italy', {'visit' : ['June 2012']});
   data['Japan'] = genEntry('Japan', {'visit' : ['Apr 2019', 'Jun 2015']});
